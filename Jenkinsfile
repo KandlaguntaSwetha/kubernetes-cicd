@@ -33,5 +33,15 @@ pipeline {
                 sh 'docker push $DOCKER_IMAGE'
             }
         }
+       stage('Kubernetes Deploy') {
+    steps {
+        sh '''
+            kubectl apply -f k8s/deployment.yaml
+            kubectl apply -f k8s/service.yaml
+            kubectl rollout restart deployment/kubernetes-cicd-app
+            kubectl rollout status deployment/kubernetes-cicd-app
+        '''
+    }
+}
     }
 }
