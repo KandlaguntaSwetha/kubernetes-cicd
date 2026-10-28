@@ -21,6 +21,7 @@ spec:
       containers:
         - name: kubernetes-cicd-app
           image: kandlaguntaswetha/nodejs-cicd-project:1.0
+          imagePullPolicy: Always
 
           ports:
             - containerPort: 3000
