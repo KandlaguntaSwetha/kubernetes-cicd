@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
                 <title>Kubernetes CI/CD</title>
             </head>
             <body>
-                <h1>Kubernetes CI/CD Pipeline</h1>
+                <h1>Kubernetes CI/CD Pipeline - Version 2</h1>
                 <p>Application is running successfully - Version 2.</p>
                 <p>Node.js + Docker + Kubernetes + Jenkins</p>
             </body>
