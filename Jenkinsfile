@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'kandlaguntaswetha/nodejs-cicd-project:1.0'
+        DOCKER_IMAGE = "kandlaguntaswetha/nodejs-cicd-project:build-${BUILD_NUMBER}"
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
     }
 
@@ -36,9 +36,8 @@ pipeline {
        stage('Kubernetes Deploy') {
     steps {
         sh '''
-            kubectl apply -f k8s/deployment.yaml
             kubectl apply -f k8s/service.yaml
-            kubectl rollout restart deployment/kubernetes-cicd-app
+            kubectl set image deployment/kubernetes-cicd-app kubernetes-cicd-app=$DOCKER_IMAGE
             kubectl rollout status deployment/kubernetes-cicd-app
         '''
     }
