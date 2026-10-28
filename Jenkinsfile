@@ -38,6 +38,7 @@ pipeline {
         sh '''
             kubectl apply -f k8s/service.yaml
             kubectl set image deployment/kubernetes-cicd-app kubernetes-cicd-app=$DOCKER_IMAGE
+            kubectl annotate deployment/kubernetes-cicd-app kubernetes.io/change-cause="Jenkins build ${BUILD_NUMBER} - ${DOCKER_IMAGE}" --overwrite
             kubectl rollout status deployment/kubernetes-cicd-app
         '''
     }
